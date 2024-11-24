@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const errorHandler = require('errorhandler');
 const lusca = require('lusca');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 /**
  * Create Express server.
@@ -12,18 +13,6 @@ require('dotenv').config();
 const app = express();
 
 app.use(cors({ origin: true }));
-// app.use(
-//   session({
-//     resave: false,
-//     saveUninitialized: true,
-//     secret: 'SECRET',
-//   })
-// );
-
-/**
- * Socket configuration.
- */
-// require('./models/helpers/InitializeConnectionHelper')(server, app);
 
 /**
  * Start Express server.
@@ -38,6 +27,7 @@ app.listen(app.get('port'), () => {
     app.get('env')
   );
   console.log('Press CTRL-C to stop\n');
+  require('./config/dbConnection');
 });
 
 /**
@@ -49,6 +39,10 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 app.disable('x-powered-by');
+app.use(
+  '/',
+  express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 })
+);
 
 // application specific logging, throwing an error, or other logic here
 process.on('unhandledRejection', (reason, p) => {
