@@ -26,11 +26,23 @@ const KilnSchema = new Schema(
   },
   {
     timestamps: true,
-    toJSON: { getters: true, virtuals: true },
+    toJSON: {
+      virtuals: true,
+      transform(doc, ret) {
+        // Ensure KilnMaterial is always an array
+        ret.KilnMaterial = Array.isArray(ret.KilnMaterial) ? ret.KilnMaterial : (ret.KilnMaterial ? [ret.KilnMaterial] : []);
+        return ret;
+      },
+    },
     toObject: { getters: true, virtuals: true },
   }
 );
-
+// Virtual for KilnMaterial
+KilnSchema.virtual('KilnMaterial', {
+  ref: 'KilnMaterial', // Name of the model to join
+  localField: '_id', // Field in the Kiln model
+  foreignField: 'kiln_id', // Field in the KilnMaterial model
+});
 const Kiln = mongoose.model('Kiln', KilnSchema, 'Kiln');
 
 exports.Kiln = Kiln;

@@ -28,7 +28,15 @@ exports.getAllKiln = async () => {
     const query = {
       status: 'active',
     };
-    return await this.findAll(query);
+    return await Kiln.find(query)
+      .lean() // Convert to plain JS objects
+      .populate({
+        path: 'KilnMaterial', // Reference to the KilnMaterial model
+        populate: {
+          path: 'material_id', // Reference to the Material model
+          // select: 'name', // Include specific fields
+        },
+      });
   } catch (error) {
     console.log('error', error);
   }
