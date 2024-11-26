@@ -34,10 +34,37 @@ exports.getAllKiln = async () => {
         path: 'KilnMaterial', // Reference to the KilnMaterial model
         populate: {
           path: 'material_id', // Reference to the Material model
-          // select: 'name', // Include specific fields
         },
       });
   } catch (error) {
     console.log('error', error);
   }
+};
+
+exports.getAllKilnAndMaterialData = async () => {
+  try {
+    const data = await this.getAllKiln();
+    return calculateTotalProduction(data);
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+const calculateTotalProduction = (data) => {
+  return data && data.length > 0 && data.map((kiln) => {
+    // Check if KilnMaterial array exists and is not empty
+    if (kiln.KilnMaterial && kiln.KilnMaterial.length > 0) {
+      // Sum the yield of all materials in KilnMaterial
+      const totalYield = kiln.KilnMaterial.reduce((sum, item) => {
+        return sum + (item.material_id?.yeild || 0);
+      }, 0);
+
+      // Calculate totalProduction as total yield divided by KilnMaterial length
+      kiln.totalProduction = totalYield / kiln.KilnMaterial.length;
+    } else {
+      // If no materials, totalProduction is 0
+      kiln.totalProduction = 0;
+    }
+    return kiln;
+  });
 };

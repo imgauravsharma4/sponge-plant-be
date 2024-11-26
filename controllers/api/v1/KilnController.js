@@ -3,7 +3,7 @@ const { resCode, errorMessage, genRes } = require('../../../config/options');
 
 exports.getAllKiln = async (req, res) => {
   try {
-    const resp = await KilnRepository.getAllKiln();
+    const resp = await KilnRepository.getAllKilnAndMaterialData();
     return res.status(resCode.HTTP_OK).json(genRes(resCode.HTTP_OK, resp));
   } catch (e) {
     // customErrorLogger(e);
