@@ -13,6 +13,6 @@ const kilnRouter = require("./Kiln");
 
 
 router.use("/material", materialRouter);
-router.use("/klin", kilnRouter);
+router.use("/kiln", kilnRouter);
 
 module.exports = router;
