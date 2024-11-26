@@ -8,6 +8,11 @@ const router = express.Router();
  * APIs routes.
  */
 const materialRouter = require("./Material");
+const kilnRouter = require("./Kiln");
+
+
+
 router.use("/material", materialRouter);
+router.use("/klin", kilnRouter);
 
 module.exports = router;

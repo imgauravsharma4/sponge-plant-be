@@ -107,7 +107,6 @@ const options = {
   },
   successMessage: {
     OTP_SEND: (type) => `An OTP has been send to your ${type}`,
-    OTP_VERIFIED: (type) => `OTP has been verified`,
     LOG: (data) => `You have ${data} successfully`,
     UPDATE_SUCCESS_MESSAGE: (data) => `${data} updated successfully`,
     DELETE_SUCCESS_MESSAGE: (data) => `${data} deleted successfully`,
@@ -143,6 +142,12 @@ const options = {
     PRODUCTION: 'production',
     DEVELOPMENT: 'development',
   },
+  working_status:{
+    NOT_STARTED: 'not_started',
+    STARTED: 'started',
+    HOLD: 'hold',
+    SHUT_DOWN: 'shut_down'
+  }
 };
 
 module.exports = options;
