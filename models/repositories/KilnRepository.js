@@ -56,11 +56,18 @@ const calculateTotalProduction = (data) => {
     if (kiln.KilnMaterial && kiln.KilnMaterial.length > 0) {
       // Sum the yield of all materials in KilnMaterial
       const totalYield = kiln.KilnMaterial.reduce((sum, item) => {
-        return sum + (item.material_id?.yeild || 0);
+        return sum + (item?.material_id?.yeild || 0);
       }, 0);
 
+      const totalFeedrate = kiln.KilnMaterial.reduce((sum, item) => {
+        return sum + (item?.quantity || 0);
+      }, 0);
+
+      const averageYield = totalYield / kiln.KilnMaterial.length
+      const averageFeedrate = totalFeedrate / kiln.KilnMaterial.length
+
       // Calculate totalProduction as total yield divided by KilnMaterial length
-      kiln.totalProduction = totalYield / kiln.KilnMaterial.length;
+      kiln.totalProduction = Number(averageYield) * Number(averageFeedrate) ;
     } else {
       // If no materials, totalProduction is 0
       kiln.totalProduction = 0;
