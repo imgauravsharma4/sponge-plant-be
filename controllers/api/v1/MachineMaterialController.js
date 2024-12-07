@@ -1,9 +1,9 @@
-const KilnMaterialRepository = require('../../../models/repositories/KilnMaterialRepository');
+const MachineMaterialRepository = require('../../../models/repositories/MachineMaterialRepository');
 const { resCode, errorMessage, genRes } = require('../../../config/options');
 
-exports.getAllKilnMaterial = async (req, res) => {
+exports.getAllMachineMaterial = async (req, res) => {
   try {
-    const resp = await KilnMaterialRepository.getAllKiln();
+    const resp = await MachineMaterialRepository.getAllMachineMaterial();
     return res.status(resCode.HTTP_OK).json(genRes(resCode.HTTP_OK, resp));
   } catch (e) {
     // customErrorLogger(e);
@@ -16,7 +16,7 @@ exports.getAllKilnMaterial = async (req, res) => {
 };
 exports.postCreateAndEdit = async (req, res) => {
   try {
-    const resp = await KilnMaterialRepository.createAndUpdate(req.body);
+    const resp = await MachineMaterialRepository.createAndUpdate(req.body);
     return res.status(resCode.HTTP_OK).json(genRes(resCode.HTTP_OK, resp));
   } catch (e) {
     // customErrorLogger(e);

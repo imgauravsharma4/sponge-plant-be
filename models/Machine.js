@@ -13,6 +13,10 @@ const MachineSchema = new Schema(
       type: Number,
       required: false,
     },
+    feed_rate: {
+      type: Number,
+      required: false,
+    },
     working_status: {
       type: String,
       required: false,

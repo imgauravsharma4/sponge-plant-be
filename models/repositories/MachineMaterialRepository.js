@@ -1,12 +1,12 @@
-const { KilnMaterial } = require('../KilnMaterial');
+const { MachineMaterial } = require('../MachineMaterial');
 
-exports.findAll = async (query) => await KilnMaterial.find(query);
-exports.findOne = async (query) => await KilnMaterial.findOne(query);
-exports.create = async (body) => await KilnMaterial.create(body);
+exports.findAll = async (query) => await MachineMaterial.find(query);
+exports.findOne = async (query) => await MachineMaterial.findOne(query);
+exports.create = async (body) => await MachineMaterial.create(body);
 
 exports.update = async (query, body) => {
   try {
-    return await KilnMaterial.findByIdAndUpdate(query, body);
+    return await MachineMaterial.findByIdAndUpdate(query, body);
   } catch (error) {
     console.log('error', error);
   }
@@ -23,7 +23,7 @@ exports.createAndUpdate = async (body) => {
   }
 };
 
-exports.getAllMaterial = async () => {
+exports.getAllMachineMaterial = async () => {
   try {
     const query = {
       status: 'active',

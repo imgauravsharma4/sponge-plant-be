@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const { defaultStatus } = require('../config/options');
 const { Schema } = mongoose;
-const KilnMaterialSchema = new Schema(
+const MachineMaterialSchema = new Schema(
   {
-    kiln_id: {
+    machine_id: {
       type: Schema.Types.ObjectId, // ObjectId to reference another collection
-      ref: 'Kiln', // Reference the Machine collection
+      ref: 'Machine', // Reference the Machine collection
       required: true, // Make it mandatory
     },
     material_id: {
@@ -30,10 +30,10 @@ const KilnMaterialSchema = new Schema(
   }
 );
 
-const KilnMaterial = mongoose.model(
-  'KilnMaterial',
-  KilnMaterialSchema,
-  'KilnMaterial'
+const MachineMaterial = mongoose.model(
+  'MachineMaterial',
+  MachineMaterialSchema,
+  'MachineMaterial'
 );
 
-exports.KilnMaterial = KilnMaterial;
+exports.MachineMaterial = MachineMaterial;
